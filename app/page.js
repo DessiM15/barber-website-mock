@@ -4,6 +4,7 @@ import { Scissors, Clock, Award, Sparkles, ArrowRight, Star } from "@/components
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import BookButton from "@/components/BookButton";
+import ColumnGallery from "@/components/ColumnGallery";
 import { SectionHeading, Marquee } from "@/components/Section";
 import { services, team, reviews, gallery, site } from "@/lib/site";
 
@@ -151,22 +152,21 @@ export default function HomePage() {
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member, i) => (
               <Reveal key={member.name} delay={(i % 4) * 0.08}>
-                <div className="group overflow-hidden rounded-2xl border border-ink-line bg-ink-card">
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-display text-lg text-cream">
+                <div className="group relative h-[460px] overflow-hidden rounded-2xl border border-ink-line md:h-[600px]">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                  />
+                  {/* Transparent scrim so the name reads directly over the photo */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <h3 className="font-display text-2xl text-cream">
                       {member.name}
                     </h3>
-                    <p className="text-xs uppercase tracking-[0.15em] text-gold">
+                    <p className="mt-1 text-xs uppercase tracking-[0.18em] text-gold">
                       {member.role}
                     </p>
                   </div>
@@ -190,30 +190,8 @@ export default function HomePage() {
             title="Fresh From the Chair"
             subtitle="A look at the cuts, fades, and finishes leaving our shop every day."
           />
-          <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3">
-            {gallery.slice(0, 6).map((src, i) => (
-              <Reveal
-                key={src}
-                delay={(i % 3) * 0.06}
-                className={`relative overflow-hidden rounded-xl ${
-                  i === 0 ? "row-span-2 md:col-span-1" : ""
-                }`}
-              >
-                <div
-                  className={`group relative ${
-                    i === 0 ? "aspect-[3/4] md:h-full" : "aspect-square"
-                  }`}
-                >
-                  <Image
-                    src={src}
-                    alt="Fresh cut at The Houston Barber"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                  />
-                </div>
-              </Reveal>
-            ))}
+          <div className="mt-14">
+            <ColumnGallery images={gallery} columns={4} />
           </div>
           <div className="mt-12 text-center">
             <Link href="/gallery" className="btn-outline">
