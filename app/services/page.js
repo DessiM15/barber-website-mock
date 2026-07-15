@@ -1,8 +1,9 @@
-import { Clock, Check, Star } from "@/components/icons";
+import { Check } from "@/components/icons";
 import { PageHero, SectionHeading } from "@/components/Section";
 import Reveal from "@/components/Reveal";
 import BookButton from "@/components/BookButton";
-import { services } from "@/lib/site";
+import ServicesMenu from "@/components/ServicesMenu";
+import { services, serviceCategories } from "@/lib/site";
 
 export const metadata = {
   title: "Services & Pricing — The Houston Barber",
@@ -28,39 +29,8 @@ export default function ServicesPage() {
       />
 
       <section className="py-20 md:py-28">
-        <div className="container-luxe grid gap-4 md:grid-cols-2">
-          {services.map((s, i) => (
-            <Reveal key={s.name} delay={(i % 2) * 0.06}>
-              <div
-                className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border bg-ink-card p-8 transition-colors ${
-                  s.featured
-                    ? "border-gold/40"
-                    : "border-ink-line hover:border-gold/30"
-                }`}
-              >
-                {s.featured && (
-                  <span className="absolute right-6 top-6 flex items-center gap-1 rounded-full border border-gold/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.15em] text-gold">
-                    <Star className="h-3 w-3 fill-gold" /> Signature
-                  </span>
-                )}
-                <div>
-                  <h3 className="font-display text-2xl text-cream">{s.name}</h3>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-cream/60">
-                    {s.desc}
-                  </p>
-                </div>
-                <div className="mt-6 flex items-end justify-between border-t border-ink-line pt-5">
-                  <div className="flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-cream/45">
-                    <Clock className="h-3.5 w-3.5 text-gold" />
-                    {s.duration}
-                  </div>
-                  <div className="font-display text-3xl text-gold">
-                    ${s.price}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+        <div className="container-luxe">
+          <ServicesMenu services={services} categories={serviceCategories} />
         </div>
       </section>
 

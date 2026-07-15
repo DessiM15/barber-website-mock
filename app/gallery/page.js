@@ -1,5 +1,5 @@
 import { PageHero } from "@/components/Section";
-import ColumnGallery from "@/components/ColumnGallery";
+import StaticGallery from "@/components/StaticGallery";
 import BookButton from "@/components/BookButton";
 import { gallery } from "@/lib/site";
 
@@ -21,7 +21,7 @@ export default function GalleryPage() {
 
       <section className="py-20 md:py-28">
         <div className="container-luxe">
-          <ColumnGallery images={gallery} columns={4} />
+          <StaticGallery images={gallery} />
           <div className="mt-16 text-center">
             <BookButton className="text-base">Get the Look</BookButton>
           </div>
