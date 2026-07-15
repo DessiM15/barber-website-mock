@@ -51,7 +51,7 @@ export default function HomePage() {
         <div className="container-luxe grid grid-cols-2 gap-8 py-14 md:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="text-center">
-              <div className="font-display text-4xl text-gradient-gold md:text-5xl">
+              <div className="font-display text-4xl text-gold md:text-5xl">
                 {s.value}
               </div>
               <div className="mt-2 text-xs uppercase tracking-[0.2em] text-cream/55">
@@ -68,7 +68,7 @@ export default function HomePage() {
           <Reveal className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1521490878406-8b3730b35c96?auto=format&fit=crop&w=1000&q=80"
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=80"
                 alt="Barber giving a precision cut at The Houston Barber"
                 fill
                 className="object-cover"
@@ -76,7 +76,7 @@ export default function HomePage() {
               />
             </div>
             <div className="absolute -bottom-6 -right-4 hidden rounded-2xl border border-gold/30 bg-ink-card p-6 shadow-2xl md:block">
-              <div className="font-display text-4xl text-gradient-gold">4.9</div>
+              <div className="font-display text-4xl text-gold">4.9</div>
               <div className="mt-1 flex text-gold">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3.5 w-3.5 fill-gold" />

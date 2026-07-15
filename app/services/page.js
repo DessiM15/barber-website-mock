@@ -54,7 +54,7 @@ export default function ServicesPage() {
                     <Clock className="h-3.5 w-3.5 text-gold" />
                     {s.duration}
                   </div>
-                  <div className="font-display text-3xl text-gradient-gold">
+                  <div className="font-display text-3xl text-gold">
                     ${s.price}
                   </div>
                 </div>

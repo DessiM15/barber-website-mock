@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-}
+/* --font-display (Fraunces) and --font-sans (Inter) are injected on <html>
+   by next/font in app/layout.js — do not hardcode them here or they conflict. */
 
 @layer base {
   html {
@@ -20,6 +18,8 @@
   }
   h1, h2, h3, h4 {
     @apply font-display;
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
   }
 }
 

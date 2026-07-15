@@ -13,8 +13,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  const navLeft = nav.slice(0, 4);
+  const navRight = nav.slice(4);
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -31,6 +34,15 @@ export default function Navbar() {
     };
   }, [open]);
 
+  // On the homepage the hero owns the big centered logo, so the navbar
+  // logo only fades in once you scroll. On every other page there's no
+  // hero logo, so show the navbar logo immediately.
+  const isHome = pathname === "/";
+  const showLogo = scrolled || !isHome;
+
+  const linkClass = (href) =>
+    `link-nav ${pathname === href ? "text-gold after:w-full" : ""}`;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -39,40 +51,50 @@ export default function Navbar() {
           : "bg-gradient-to-b from-black/60 to-transparent"
       }`}
     >
-      <nav className="container-luxe flex h-20 items-center justify-between">
-        <Link href="/" aria-label="The Houston Barber — home">
-          <Logo />
-        </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-8 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`link-nav ${
-                pathname === item.href ? "text-gold after:w-full" : ""
-              }`}
-            >
+      <nav className="container-luxe relative flex h-20 items-center justify-between">
+        {/* Left links (desktop) */}
+        <div className="hidden flex-1 items-center gap-6 lg:flex">
+          {navLeft.map((item) => (
+            <Link key={item.href} href={item.href} className={linkClass(item.href)}>
               {item.label}
             </Link>
           ))}
         </div>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        {/* Centered logo — crossfades in */}
+        <Link
+          href="/"
+          aria-label="The Houston Barber — home"
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
+            showLogo
+              ? "translate-y-[-50%] opacity-100"
+              : "pointer-events-none translate-y-[-30%] opacity-0"
+          }`}
+        >
+          <Logo />
+        </Link>
+
+        {/* Right links + actions (desktop) */}
+        <div className="hidden flex-1 items-center justify-end gap-6 lg:flex">
+          {navRight.map((item) => (
+            <Link key={item.href} href={item.href} className={linkClass(item.href)}>
+              {item.label}
+            </Link>
+          ))}
+          <span className="h-5 w-px bg-ink-line" />
           <a
             href={site.phoneHref}
-            className="flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-gold"
+            aria-label={`Call ${site.phone}`}
+            className="text-cream/70 transition-colors hover:text-gold"
           >
             <Phone className="h-4 w-4" />
-            {site.phone}
           </a>
           <BookButton withIcon={false}>Book</BookButton>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="text-cream lg:hidden"
+          className="ml-auto text-cream lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
         >
@@ -83,7 +105,7 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`overflow-hidden bg-ink transition-[max-height] duration-500 lg:hidden ${
-          open ? "max-h-[80vh]" : "max-h-0"
+          open ? "max-h-[85vh]" : "max-h-0"
         }`}
       >
         <div className="container-luxe flex flex-col gap-1 py-6">

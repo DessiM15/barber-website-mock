@@ -24,7 +24,7 @@ export default function ReviewsPage() {
       <section className="border-b border-ink-line py-14">
         <div className="container-luxe flex flex-col items-center justify-center gap-8 sm:flex-row sm:gap-16">
           <div className="text-center">
-            <div className="font-display text-6xl text-gradient-gold">4.9</div>
+            <div className="font-display text-6xl text-gold">4.9</div>
             <div className="mt-2 flex justify-center text-gold">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="h-5 w-5 fill-gold" />
