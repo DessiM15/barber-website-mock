@@ -13,8 +13,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  const navLeft = nav.slice(0, 4);
-  const navRight = nav.slice(4);
+  // Keep the desktop bar uncluttered so the centered logo has room.
+  // Team & Shop still live in the mobile drawer and the footer.
+  const hiddenFromBar = ["/team", "/shop"];
+  const barNav = nav.filter((n) => !hiddenFromBar.includes(n.href));
+  const mid = Math.ceil(barNav.length / 2);
+  const navLeft = barNav.slice(0, mid);
+  const navRight = barNav.slice(mid);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);

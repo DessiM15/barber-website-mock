@@ -7,13 +7,6 @@ import BookButton from "@/components/BookButton";
 import { SectionHeading, Marquee } from "@/components/Section";
 import { services, team, reviews, gallery, site } from "@/lib/site";
 
-const stats = [
-  { value: "12+", label: "Years of craft" },
-  { value: "500+", label: "Five-star reviews" },
-  { value: "4", label: "Master barbers" },
-  { value: "7d", label: "Open every week" },
-];
-
 const perks = [
   {
     icon: Scissors,
@@ -45,22 +38,6 @@ export default function HomePage() {
       <Marquee
         items={["Precision Fades", "Straight-Razor Shaves", "Beard Sculpting", "Classic Cuts", "Hot-Towel Finish"]}
       />
-
-      {/* Stats */}
-      <section className="border-b border-ink-line bg-ink">
-        <div className="container-luxe grid grid-cols-2 gap-8 py-14 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08} className="text-center">
-              <div className="font-display text-4xl text-gold md:text-5xl">
-                {s.value}
-              </div>
-              <div className="mt-2 text-xs uppercase tracking-[0.2em] text-cream/55">
-                {s.label}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
 
       {/* About strip */}
       <section className="relative overflow-hidden py-24 md:py-32">
